@@ -1,10 +1,5 @@
 ---
-longform:
-  format: scenes
-  title: Raspberry_PI
-  sceneFolder: /
-  scenes: []
-  ignoredFiles: []
+title: Raspberry_PI
 draft: false
 ---
 Here is just a test
