@@ -1,5 +1,5 @@
 ---
-title: Creating my first server
+title: 1. Personal Cloud
 draft: false
 tags:
   - Server
