@@ -19,8 +19,8 @@ interface FolderContentOptions {
 }
 
 const defaultOptions: FolderContentOptions = {
-  showFolderCount: true,
-  showSubfolders: true,
+  showFolderCount: false,
+  showSubfolders: false,
 }
 
 export default ((opts?: Partial<FolderContentOptions>) => {
