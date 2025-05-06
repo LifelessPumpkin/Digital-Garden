@@ -1,5 +1,10 @@
 ---
 title: 1. Fish Tacos
+tags:
+  - Fish
+  - Taco
+  - Pan
+  - Cast-Iron
 ---
 # Ingredients:
 ## For the fish:
@@ -37,4 +42,3 @@ title: 1. Fish Tacos
 
 # Notes:
 - Use any white flaky fish filet, like cod, snapper, grouper, mahi-mahi, hogfish
-- 
