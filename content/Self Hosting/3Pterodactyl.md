@@ -80,102 +80,73 @@ nano docker-compose.yml
 
 docker-compose.yml
 ```
-version: "3.8"
-# This section declares the basic config of all of your Containers that are
-# declared below as "services"
-x-common:
-  database:
-    &db-environment
-    # You don't need to change these because it will not be exposed to the public.
-    MYSQL_PASSWORD: &db-password "CHANGE_ME"
-    MYSQL_ROOT_PASSWORD: "CHANGE_ME_TOO"
-  panel:
-    &panel-environment
-    #This is the URL that your panel will be on after being reverse proxied.
-    # set this to "https://yoursubdomain.yourdomain.yourdomainstld"
-    APP_URL: "https://subdomain.domain.tld"
-    # A list of valid timezones can be found here:
-    # http://php.net/manual/en/timezones.php
-    APP_TIMEZONE: "America/New_York"
-    APP_SERVICE_AUTHOR: "youremail@gmail.com"
-  # Mail is an optional Setup, I have the basic setup if you want to use a gmail
-  # account. You will need an App Password as the MAIL_PASSWORD field, not your
-  # gmail password. Uncomment the following lines to enable mail.
+version: '3.8'
 
-  #mail:
-    #&mail-environment
-    #MAIL_FROM: "youremail@gmail.com"
-    #MAIL_DRIVER: "smtp"
-    #MAIL_HOST: "smtp.gmail.com"
-    #MAIL_PORT: "587"
-    #MAIL_USERNAME: "youremail@gmail.com"
-    #MAIL_PASSWORD: ""
-    #MAIL_ENCRYPTION: "true"
+x-common:
+  database: &db-environment
+    MYSQL_PASSWORD: &db-password "secret :)"
+    MYSQL_ROOT_PASSWORD: "secret :)"
+  panel: &panel-environment
+    APP_URL: "http://loganharmondeveloper.com"
+    APP_TIMEZONE: "UTC"
+    APP_SERVICE_AUTHOR: "logan3harmon@gmail.com"
+    # LE_EMAIL: ""
+
 services:
-  # Wings is the service that hooks into docker and actually creates your game
-  # servers,
   wings:
     image: ghcr.io/pterodactyl/wings:latest
     restart: always
     networks:
-      - ptero0
-    # These are the ports exposed by Wings, I don't recommend changing them.
+      - wings0
     ports:
-      - "8443:443"
+      - "8081:8081"
       - "2022:2022"
     tty: true
     environment:
-      TZ: "America/New_York"
-      # For ease of setup, this is going to use root user.
-      WINGS_UID: 0
-      WINGS_GID: 0
-      WINGS_USERNAME: root
-    # This is where docker will bind certain parts of container to your actual
-    # host OS. These locations will be used later.
+      TZ: "UTC"
+      WINGS_UID: 988
+      WINGS_GID: 988
+      WINGS_USERNAME: pterodactyl
     volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock" # DO NOT CHANGE
-      - "/var/lib/docker/containers:/var/lib/docker/containers" # DO NOT CHANGE
-      - "/opt/pterodactyl/wings/config:/etc/pterodactyl" # Feel free to change.
-      - "/var/lib/pterodactyl:/var/lib/pterodactyl" # DO NOT CHANGE
-      - "/var/log/pterodactyl:/var/log/pterodactyl" # DO NOT CHANGE
-      - "/tmp/pterodactyl/:/tmp/pterodactyl/" # Recommended not to change.
-  # It's a database. Not much else to explain.
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "/var/lib/docker/containers/:/var/lib/docker/containers/"
+      - "/etc/pterodactyl/:/etc/pterodactyl/"
+      - "/var/lib/pterodactyl/:/var/lib/pterodactyl/"
+      - "/var/log/pterodactyl/:/var/log/pterodactyl/"
+      - "/tmp/pterodactyl/:/tmp/pterodactyl/"
+      - "/etc/ssl/certs:/etc/ssl/certs:ro"
+
   database:
     image: mariadb:10.5
     restart: always
     command: --default-authentication-plugin=mysql_native_password
     volumes:
-      - "/opt/pterodactyl/panel/database:/var/lib/mysql"
+      - "/srv/pterodactyl/database:/var/lib/mysql"
     environment:
       <<: *db-environment
       MYSQL_DATABASE: "panel"
       MYSQL_USER: "pterodactyl"
-  # It's a CACHE database. Not much else to explain.
+
   cache:
     image: redis:alpine
     restart: always
-  # Now the fun part. Your actual panel.
+
   panel:
     image: ghcr.io/pterodactyl/panel:latest
     restart: always
-    # For NGINX Reverse Proxy, I will be using these ports for simplicity.
     ports:
-      - "802:80"
+      - "82:80"
       - "4432:443"
-    # Links these containers together in a docker network.
     links:
       - database
       - cache
-    # This is where docker will bind certain parts of container to your actual
-    # host OS. These don't really matter that much.
     volumes:
-      - "/opt/pterodactyl/panel/appvar/:/app/var/"
-      - "/opt/pterodactyl/panel/nginx/:/etc/nginx/http.d/"
-      - "/opt/pterodactyl/panel/logs/:/app/storage/logs"
-    # Sets the config stuff
+      - "/srv/pterodactyl/var/:/app/var/"
+      - "/srv/pterodactyl/nginx/:/etc/nginx/http.d/"
+      # - "/srv/pterodactyl/certs/:/etc/letsencrypt/"
+      - "/srv/pterodactyl/logs/:/app/storage/logs"
     environment:
       <<: [*panel-environment]
-      # <<: [*mail-environment]
       DB_PASSWORD: *db-password
       APP_ENV: "production"
       APP_ENVIRONMENT_ONLY: "false"
@@ -185,20 +156,19 @@ services:
       REDIS_HOST: "cache"
       DB_HOST: "database"
       DB_PORT: "3306"
-# This is Wings' Network. We don't need much depth here, all you need to know, is
-# that it allows the passthrough of the ports from Wings.
+
 networks:
-  ptero0:
-    name: ptero0
+  wings0:
+    name: wings0
     driver: bridge
     ipam:
       config:
-        - subnet: "192.55.0.0/16"
+        - subnet: "172.21.0.0/16"
     driver_opts:
-      com.docker.network.bridge.name: ptero0
+      com.docker.network.bridge.name: wings0
 ```
 
-> [!NOTE] A module I used, 'distutils' was removed from python so I needed to install it
+I created this docker-compose file from the [Pterodactyl Github ](https://github.com/pterodactyl) repo examples in the panel and wings repo. Furthermore I was missing the distutils library so I installed that 
 
 ```
 sudo apt update
@@ -210,4 +180,6 @@ sudo apt install python3-distutils -y
 docker compose up
 ```
 
-Once it's done spinning up, I hit Ctrl+C to gracefully stop the containers. Then in portainer I start up all containers except the wings.
+Once it's done spinning up, it will give errors because wings doesn't have the config file it wants. So I hit Ctrl+C to gracefully stop all the containers. Then in portainer I start up all containers except the wings. I can go to the pterodactyl panel now at port 82!
+
+From this point on, I completed 4. Changing to my Domain Name and I'm adding to this from that point.

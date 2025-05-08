@@ -1,5 +1,5 @@
 ---
-title: Minecraft Server
+title: 2. Minecraft Server
 tags:
   - Minecraft
   - Server
