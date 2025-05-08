@@ -1,3 +1,3 @@
 ---
-title: "1."
+title: 1. Baby Back Ribs
 ---

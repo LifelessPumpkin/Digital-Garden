@@ -1,5 +1,5 @@
 ---
-title: 1. Personal Cloud
+title: 1. Beginning My Personal Cloud
 draft: false
 tags:
   - Server
@@ -42,4 +42,6 @@ sudo apt install --install-recommends webmin -y
 sudo systemctl enable webmin
 ```
 
-Webmin is now accessible through port 10000!
+Webmin is now accessible through port 10000 and I can see all my system stats! This is all pretty simple but its a good starting point. I plan to work on a minecraft server next!
+
+![[pikmin-4-oatchi-cute.avif]]
