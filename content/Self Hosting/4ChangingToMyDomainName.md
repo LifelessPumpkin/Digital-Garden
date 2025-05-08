@@ -146,4 +146,4 @@ sudo systemctl reload nginx
 
 Now I can go to https://panel.loganharmondeveloper.com and I go to my Pterodactyl panel! Since I have NGINX listening on port 80, Cloudflare handles all the HTTPS to the user. Im going to get the rest of my services running on my subdomain next!
 
-![[pikmin-4-oatchi-cute.avif]]
+![[bulborb_eating.png]]

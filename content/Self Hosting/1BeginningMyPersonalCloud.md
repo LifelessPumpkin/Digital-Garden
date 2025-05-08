@@ -44,4 +44,4 @@ sudo systemctl enable webmin
 
 Webmin is now accessible through port 10000 and I can see all my system stats! This is all pretty simple but its a good starting point. I plan to work on a minecraft server next!
 
-![[pikmin-4-oatchi-cute.avif]]
+![[pikmin_3_berries.webp]]
