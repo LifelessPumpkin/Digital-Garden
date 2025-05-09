@@ -21,7 +21,8 @@ So I didn't want to be accessing my server's information through the lan/Tailsca
 
 The only problem I have with Cloudflare is the latency it adds. For most things its not really a problem like webmin, pterodactyl panel, Jellyfin, etc. But for playing games(my Minecraft server) it would add some latency that I don't really want. So I decided to go with a split approach. The normal web stuff will run through Cloudflare and the pterodactyl wings(game servers) will run through Tailscale. I can't get an IP from my ISP because Frontier only does it for business accounts(and it's like 500 dollars lol) so I'm going to stick with Tailscale for now. The only limitation I have with that is that it can only host 6 people, so I will try to find some alternative later. My next step is installing NGINX for the reverse proxy layer.
 
-### NGINX
+# Implementation
+## NGINX
 
 1. Install NGINX
 ```bash
@@ -36,7 +37,7 @@ sudo systemctl start nginx
 
 >[!WARNING] Be careful for port conflicts!
 
-### Cloudflared
+## Cloudflared
 1. Download the repo
 ```bash
 curl -fsSL https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb -o cloudflared.deb

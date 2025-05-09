@@ -2,18 +2,19 @@
 title: 5. Portainer
 tags:
   - Portainer
-  - Server
   - Docker
   - Containers
   - NGINX
   - Cloudflare
   - Tunnels
+  - Server
 ---
 # Preamble
 
 The next subdomain I'm working on is Portainer. I want to have the nice GUI that it provides for my containers since I am going to have many. Maybe this could help for when I eventually use kubernetes.
 
-### Cloudflare Tunnel
+# Implementation
+## Cloudflare Tunnel
 
 1. Edit the Tunnel Config
 ```bash
@@ -53,7 +54,7 @@ docker run -d \
   portainer/portainer-ce
 ```
 
-### NGINX
+## NGINX
 
 Since Portainer already uses https automatically it can cause some problems because Cloudflare is also trying to provide SSL. So I am going to use NGINX in the loop for Portainer in http so that Cloudflare will provide the SSL.
 

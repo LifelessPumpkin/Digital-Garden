@@ -1,8 +1,9 @@
 ---
-title: Lightsail Website Creation
+title: 1. Lightsail Website Creation
 ---
 # Hi! This is all the steps I used to set up my webpage on AWS! 
-#### I used Lightsail and set up an Ubuntu 24.04 OS with 2 GB of RAM, 2 vCPUs and a 60 GB SSD. I decided to use a blank Ubuntu Instance instead of the preset LAMP for two reasons. I wanted to set everything up myself from the very beginning. I want full control of the environment.
+
+I used Lightsail and set up an Ubuntu 24.04 OS with 2 GB of RAM, 2 vCPUs and a 60 GB SSD. I decided to use a blank Ubuntu Instance instead of the preset LAMP for two reasons. I wanted to set everything up myself from the very beginning. I want full control of the environment.
 
 # Installing Apache 
 ## Update the package manager
@@ -25,7 +26,8 @@ sudo ufw allow in "Apache"
 ```sh
 sudo ufw status
 ```
-#### The Apache server is now up and running! It just shows the default landing page for now but I will change that soon.
+
+The Apache server is now up and running! It just shows the default landing page for now but I will change that soon.
 
 # Installing MySQL 
 ## Install MySQL server
@@ -54,9 +56,10 @@ php -v
 ```sh
 sudo nano /etc/apache2/mods-enabled/dir.conf
 ```
-#### I edited this file by moving the order of index.php so that it takes precedence over index.html
 
-#### I purchased the domain name loganharmondeveloper.com from Route 53
+I edited this file by moving the order of index.php so that it takes precedence over index.html
+
+I purchased the domain name loganharmondeveloper.com from Route 53
 
 ## Creating the virtual host
 ```sh
@@ -74,6 +77,7 @@ sudo nano /etc/apache2/sites-available/loganharmondeveloper.conf
 ```
 ## I put this into the new config file
 
+```conf
     <VirtualHost *:80>
         ServerName loganharmondeveloper
         ServerAlias www.loganharmondeveloper
@@ -82,6 +86,7 @@ sudo nano /etc/apache2/sites-available/loganharmondeveloper.conf
         ErrorLog ${APACHE_LOG_DIR}/error.log
         CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
+```
 
 ## Disable the default site
 ```sh
@@ -108,6 +113,6 @@ sudo systemctl reload apache2
 sudo systemctl daemon-reload
 ```
 
-# Now the website is all ready and I will start with the app!
+Now the website is all ready and I will start with the app!
 
 ![happy cat :)](https://delavanlakesvet.com/wp-content/uploads/sites/195/2022/03/smiling-cat-for-web.jpg)

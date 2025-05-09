@@ -14,9 +14,9 @@ draft: false
 So my friends and I have been playing on the server for a little while and its been working great! I found a slight limitation with TailScale. It's free until 5 users. I'm a little sad because I want to do everything on from this point completely open source. Alas I must attempt something different than TailScale. However I think this is also a good thing because I don't want my users to need to download something to get access to the server. So I am going to have to learn more about networking. 
 Before I get into that stuff, I first want to start with Pterodactyl. Pterodactyl manages my game servers and is completely open source. Pterodactyl consists of the Panel/Web Interface and the Wings, daemons that run game servers. The wings use docker so I'm going to download that and now I will finally get some experience with containers. Another plus to using Pterodactyl is how customizable it is. I will be able to make more free servers and with a wider span of games on Pterodactyl than I could with AMP.
 
-# Set up
+# Implementation
 
-### Docker
+## Docker
 
 1. Add Docker's GPG key
 ```bash
@@ -50,7 +50,7 @@ newgrp docker
 docker ps
 ```
 
-### Portainer
+## Portainer
 
 1. Install Portainer
 ```bash
@@ -59,7 +59,7 @@ docker run -d   -p 9443:9443   -p 8000:8000   --name portainer   --restart=a
 
 All I had to do was create a user account and it was all ready!
 
-### Pterodactyl
+## Pterodactyl
 
 1. Make proper directories
 ```bash
@@ -180,6 +180,4 @@ sudo apt install python3-distutils -y
 docker compose up
 ```
 
-Once it's done spinning up, it will give errors because wings doesn't have the config file it wants. So I hit Ctrl+C to gracefully stop all the containers. Then in portainer I start up all containers except the wings. I can go to the pterodactyl panel now at port 82!
-
-From this point on, I completed 4. Changing to my Domain Name and I'm adding to this from that point.
+Once it's done spinning up, it will give errors because wings doesn't have the config file it wants. So I hit Ctrl+C to gracefully stop all the containers. Then in portainer I start up all containers except the wings. I can go to the pterodactyl panel now at port 82! Now this isn't done because there aren't any game servers running or any wings running. Soon I will create the wings but I don't need to right now.

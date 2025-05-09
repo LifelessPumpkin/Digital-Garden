@@ -11,10 +11,10 @@ tags:
 My old desktop wasn't running well for a long time and it was bothering me. So I decided to install linux on it and repurpose it into a server. I ran a bunch of diagnostics tests and attempted to find where the computer was crashing. I found this issue with my memory. The memory sticks weren't ordered correctly when they were installed and that caused the issue. I wrote over the windows os and replaced it with Ubuntu 24.04. 
 # Operating Sytem Install
 
-My brother had a flashdrive that already had the newest version of Ubuntu so he let me borrow that. I booted to the flashdrive and wrote everything over with Ubuntu. 
-# Server Setup
+My brother had a flash drive that already had the newest version of Ubuntu so he let me borrow that. I booted to the flash drive and wrote everything over with Ubuntu. 
+# Implementation
 
-### SSH
+## SSH
 
 ```bash
 sudo apt install openssh-server
@@ -22,7 +22,7 @@ sudo systemctl enable ssh
 ```
 
 I had to make sure that port 22 is open on the firewall
-### Webmin 
+## Webmin 
 
 I plan to use the server while in a different city so I want Webmin to monitor the stats of it while I'm gone
 1. Download Webmin repo script
