@@ -8,7 +8,7 @@ tags:
   - Docker
   - Portainer
   - ReverseProxy
-draft: true
+draft: false
 ---
 # Preamble
 So my friends and I have been playing on the server for a little while and its been working great! I found a slight limitation with TailScale. It's free until 5 users. I'm a little sad because I want to do everything on from this point completely open source. Alas I must attempt something different than TailScale. However I think this is also a good thing because I don't want my users to need to download something to get access to the server. So I am going to have to learn more about networking. 
