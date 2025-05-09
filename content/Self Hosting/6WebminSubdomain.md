@@ -86,10 +86,11 @@ Now I tried getting to webmin.loganharmondeveloper.com from here and I could see
 sudo nano /etc/webmin/miniserv.conf
 ```
 
-miniserv.conf
-```
+2. Add these lines to miniserv.conf
+```conf
 port=10000
 listen=
+referers=webmin.loganharmondeveloper.com
 ```
 
 I waited a bit and refreshed and I was able to get to my webmin panel!
