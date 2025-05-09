@@ -53,7 +53,7 @@ docker run -d \
   portainer/portainer-ce
 ```
 
-# NGINX
+### NGINX
 
 Since Portainer already uses https automatically it can cause some problems because Cloudflare is also trying to provide SSL. So I am going to use NGINX in the loop for Portainer in http so that Cloudflare will provide the SSL.
 

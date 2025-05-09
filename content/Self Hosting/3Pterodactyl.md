@@ -19,14 +19,14 @@ Before I get into that stuff, I first want to start with Pterodactyl. Pterodacty
 ### Docker
 
 1. Add Docker's GPG key
-```
+```bash
 sudo apt install -y ca-certificates curl gnupg
 sudo install -m 0755 -d /etc/apt/keyrings
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
 ```
 
 2. Add Docker's repo
-```
+```bash
 echo \
   "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
   $(lsb_release -cs) stable" | \
@@ -34,17 +34,17 @@ echo \
 ```
 
 3. Install Docker engine
-```
+```bash
 sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 ```
 
 4. Test Docker
-```
+```bash
 sudo docker run hello-world
 ```
 
 5. Run Docker without sudo
-```
+```bash
 sudo usermod -aG docker $USER
 newgrp docker
 docker ps
@@ -53,7 +53,7 @@ docker ps
 ### Portainer
 
 1. Install Portainer
-```
+```bash
 docker run -d   -p 9443:9443   -p 8000:8000   --name portainer   --restart=always   -v /var/run/docker.sock:/var/run/docker.sock   -v portainer_data:/data   portainer/portainer-ce:latest
 ```
 
@@ -62,7 +62,7 @@ All I had to do was create a user account and it was all ready!
 ### Pterodactyl
 
 1. Make proper directories
-```
+```bash
 mkdir /opt/pterodactyl
 cd /opt/pterodactyl/
 mkdir wings
@@ -74,12 +74,12 @@ mkdir panel/logs
 ```
 
 2. Create Dockerfile
-```
+```bash
 nano docker-compose.yml
 ```
 
 docker-compose.yml
-```
+```yml
 version: '3.8'
 
 x-common:
@@ -170,13 +170,13 @@ networks:
 
 I created this docker-compose file from the [Pterodactyl Github ](https://github.com/pterodactyl) repo examples in the panel and wings repo. Furthermore I was missing the distutils library so I installed that 
 
-```
+```bash
 sudo apt update
 sudo apt install python3-distutils -y
 ```
 
 3. Run Pterodactyl
-```
+```bash
 docker compose up
 ```
 

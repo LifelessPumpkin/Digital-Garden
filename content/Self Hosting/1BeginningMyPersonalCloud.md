@@ -16,7 +16,7 @@ My brother had a flashdrive that already had the newest version of Ubuntu so he 
 
 ### SSH
 
-```
+```bash
 sudo apt install openssh-server
 sudo systemctl enable ssh
 ```
@@ -26,19 +26,19 @@ I had to make sure that port 22 is open on the firewall
 
 I plan to use the server while in a different city so I want Webmin to monitor the stats of it while I'm gone
 1. Download Webmin repo script
-```
+```bash
 sudo curl -o setup-repos.sh https://raw.githubusercontent.com/webmin/webmin/master/setup-repos.sh; sudo bash setup-repos.sh
 ```
 2. Run the script
-```
+```bash
 sudo bash setup-repos.sh
 ```
 3. Install Webmin
-```
+```bash
 sudo apt install --install-recommends webmin -y
 ```
 4. Enable webmin on server start
-```
+```bash
 sudo systemctl enable webmin
 ```
 

@@ -17,12 +17,12 @@ So I've always liked playing online games with some friends and I didn't love ha
 
 This is the game panel that I use for Minecraft. It is a 10 dollar lifetime license for 5 instances including Minecraft and many other games. This was the only purchase I wanted to make.
 1. Switch to root
-```
+```bash
 sudo su -
 ```
 
 2. Run script
-```
+```bash
 bash <(wget -qO- getamp.sh)
 ```
 
@@ -32,18 +32,18 @@ Install runs and I setup my login info. AMP offers a very nice GUI for the Minec
 I didn't want to purchase a domain or ip for a Minecraft server so I did some research and found this mesh VPN service called TailScale. This created my own TailScale IP on my server. Then my friends can install Tailscale from my invite and they are automatically connected to my network.
 
 1. Install TailScale
-```
+```bash
 curl -fsSL https://tailscale.com/install.sh | sh
 ```
 
 2. Spin it up
-```
+```bash
 sudo tailscale up
 ```
 
 I log in with my email and my server is now a part of my network.
 3. Get TailScale IP
-```
+```bash
 tailscale ip -4
 ```
 
