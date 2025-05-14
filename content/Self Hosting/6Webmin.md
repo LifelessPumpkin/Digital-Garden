@@ -1,5 +1,5 @@
 ---
-title: 6. Webmin Subdomain
+title: 6. Webmin
 tags:
   - Webmin
   - Cloudflare
